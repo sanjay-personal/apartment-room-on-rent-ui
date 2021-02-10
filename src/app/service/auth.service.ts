@@ -27,7 +27,7 @@ export class AuthService {
 
   getLoggedIn() {
     console.log("storageee",sessionStorage.getItem("Token"))
-    if(sessionStorage.getItem("Token") !== undefined && sessionStorage.getItem("Token") !== null && sessionStorage.getItem("Token") !== 'undefined') {
+    if(sessionStorage.getItem("Token") !== undefined && sessionStorage.getItem("Token") !== null) {
       return true
     } 
     else {

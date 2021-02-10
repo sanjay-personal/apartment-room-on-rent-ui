@@ -25,11 +25,11 @@ export class LoginComponent implements OnInit {
       return;
     }
     this.loginService.postLogin(this.login).subscribe(res=>{
-      console.log(res['status'].code,res['status'].message,res)
-      if(res['status'].code === 'ERROR') {
-        alert(res['status'].message)
+      if(res['body']['code'] === 'ERROR') {
+        alert(res['body']['message'])
+        return
       }
-      this.authservice.setToken(res['token'])
+      this.authservice.setToken(res['body']['token'])
       this.authservice.loginStateChanged()
       this.router.navigate([""])
     })
