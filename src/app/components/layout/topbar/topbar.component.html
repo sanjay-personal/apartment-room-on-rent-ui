@@ -1,0 +1,60 @@
+<nav
+  class="navbar navbar-expand-md navbar-expand-sm navbar-expand-lg  navbar-expand-md navbar-expand-sm navbar-expand-xl navbar-dark bg-dark flex-row ">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03"
+    aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <a class="navbar-brand mr-auto">
+    <!-- <img src="assets/img/rvlogo.png" class="img-fluid" alt="Responsive image"> -->
+  </a>
+  <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+    <div>
+      <ul class="navbar-nav ml-2 mt-lg-0">
+        <li class="nav-item " routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+          <a class="nav-link" routerLink="">Home</a>
+        </li>
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link" routerLink='line-chart'></a>
+        </li>
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link" routerLink='bar-chart'></a>
+        </li>
+        
+
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link" routerLink='doughnut-chart'></a>
+        </li>
+
+        <!-- <li class="nav-item dropdown" routerLinkActive="active">
+          <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" routerLinkActive="active" routerLink='radar-chart'></a>
+            <a class="dropdown-item" routerLinkActive="active" routerLink='bubble-chart'></a>
+
+          </div>
+        </li> -->
+
+
+        <!-- <li class="nav-item dropdown" routerLinkActive="active">
+          <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" routerLinkActive="active" routerLink='rf'></a>
+            <a class="dropdown-item" routerLinkActive="active" routerLink='rf-fb'></a>
+
+          </div>
+        </li> -->
+        
+        <li class="nav-item" >
+          <button (click)="logout()">Logout</button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

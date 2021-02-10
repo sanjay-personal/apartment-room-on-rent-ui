@@ -1,10 +1,26 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ApartmentListComponent } from './components/apartment-list/apartment-list.component';
+import { ApartmentComponent } from './components/apartment/apartment.component';
+import { LoginComponent } from './components/login/login.component';
+import { SignupComponent } from './components/signup/signup.component';
 
 
 const routes: Routes = [{
-  path:"list",component: ApartmentListComponent
+  path: "", component: ApartmentListComponent
+},
+{
+  path: "form", component: ApartmentComponent,
+  children: [{
+    path: ':id',
+    component: ApartmentComponent
+  }
+  ]
+
+}, {
+  path: "login", component: LoginComponent
+}, {
+  path: "signup", component: SignupComponent
 }];
 
 @NgModule({

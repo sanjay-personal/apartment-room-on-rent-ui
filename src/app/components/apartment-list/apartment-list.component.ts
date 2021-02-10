@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { TreeTableData, TreeTableDataConfig, TreeTableHeaderObject, TreeTableRow } from 'angular-tree-table';
+import { TreeTableData, TreeTableDataConfig, TreeTableHeaderObject, TreeTableRow, TtDataType, TreeTableRowAction } from 'angular-tree-table';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-apartment-list',
@@ -12,7 +13,7 @@ export class ApartmentListComponent implements OnInit {
   tableData: TreeTableData = null; //Table Data Holder
 tableConfig = new TreeTableDataConfig(); //Table Configuration
 tableHeaders: TreeTableHeaderObject[] = []; //Table Headers and Property Binding
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   ngOnInit() {
 
@@ -25,6 +26,13 @@ tableHeaders: TreeTableHeaderObject[] = []; //Table Headers and Property Binding
       console.log("resppppp", resp)
       for (let i = 0; i < resp['primary'].length; i++) {
         const row = new TreeTableRow(i + '',resp['primary'][i] , false, null);
+        // const editAction = new TreeTableRowAction('Edit', 'Edit', 'btn btn-sm btn-secondary', this.edit);
+        // editAction.context = this;
+        // row.actions.push(editAction);
+        row.clickablesContext = this;
+        row.clickables = {
+          ApartmentName: this.ApartmentNameClicks,
+        };
         data.push(row);
       }
     })
@@ -40,7 +48,16 @@ tableHeaders: TreeTableHeaderObject[] = []; //Table Headers and Property Binding
     this.tableHeaders.push(new TreeTableHeaderObject('Joining Date', 'JoiningDate', null, true));
     this.tableHeaders.push(new TreeTableHeaderObject('Apartment Id', 'ApartmentId', null, true));
     this.tableHeaders.push(new TreeTableHeaderObject('Number Of Vehicles', 'NumberOfVehicles', null, true));
+    // const actions = new TreeTableHeaderObject('Actions', '', null, true);
+    // actions.dataType = TtDataType.ACTIONS;
+    // this.tableHeaders.push(actions);
     this.tableData.headers = this.tableHeaders;
+  }
+
+
+  ApartmentNameClicks(data: any) {
+    console.log("data",data)
+    this.router.navigate(['/form/' + data['ApartmentId']],{queryParams:{id: data['ApartmentId']}});
   }
 
 }

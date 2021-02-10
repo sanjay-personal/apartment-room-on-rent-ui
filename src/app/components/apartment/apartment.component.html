@@ -1,0 +1,204 @@
+<div class="container">
+    <form #apartmetForm="ngForm" class="pt-3" (ngSubmit)="submit(apartmetForm)">
+  
+      <div class="row">
+        <div class="col-sm-3">
+          <div class="form-group">
+            <label for="ApartmentName">*Apartment Name:</label>
+            <input type="text" class="form-control" name="ApartmentName" [(ngModel)]="model.ApartmentName"
+              #ApartmentName="ngModel" required />
+            <div class="text-danger " *ngIf="ApartmentName.invalid &&(ApartmentName.touched || apartmetForm.submitted)">
+              <small>
+                Please Enter Apartment Name</small>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-3">
+  
+          <label for="Staying">*Staying:</label>
+          <ng-multiselect-dropdown [data]="StayingArray" (onSelect)="onStayingSelect($event)"
+            (onDeSelect)="onStayingDeSelect($event)" name="Staying" [(ngModel)]="model.Staying"
+            [settings]="StayingSettings" #Staying="ngModel" required>
+          </ng-multiselect-dropdown>
+          <div class="text-danger " *ngIf="Staying.invalid &&(Staying.touched || apartmetForm.submitted)"><small>
+              Please Select Staying</small>
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <label for="Particular">*Particular:</label>
+          <ng-multiselect-dropdown (onSelect)="onParticularSelect($event)" (onDeSelect)="onParticularDeSelect($event)"
+            [data]="ParticularArray" name="particular" [(ngModel)]="particular" [settings]="ParticularSettings"
+            #Particular="ngModel" required>
+          </ng-multiselect-dropdown>
+          <div class="text-danger " *ngIf="Particular.invalid &&(Particular.touched || apartmetForm.submitted)"><small>
+              Please Select Particular</small>
+          </div>
+        </div>
+        
+          <div class="col-sm-3">
+  
+            <div class="form-group">
+              <label for="JoiningDate">*Joining Date:</label>
+              <input type="date" class="form-control" #JoiningDate="ngModel" name="JoiningDate"
+                [(ngModel)]="model.JoiningDate" required />
+              <div class="text-danger " *ngIf="JoiningDate.invalid &&(JoiningDate.touched || apartmetForm.submitted)">
+                <small>
+                  Please Enter Joining Date</small>
+              </div>
+            </div>
+  
+          </div>
+        </div>
+  
+        <div class="row">
+          <div class="col-sm-3" *ngIf="blockToggle">
+            <div class="form-group">
+              <label for="BlockNumber">*Block Number:</label>
+              <input type="text" class="form-control" name="BlockNumber" [(ngModel)]="model.BlockNumber"  #BlockNumber="ngModel" required />
+              <div class="text-danger " *ngIf="BlockNumber.invalid &&(BlockNumber.touched || apartmetForm.submitted)">
+                <small>
+                  Please Enter Block Number</small>
+              </div>
+            </div>
+  
+          </div>
+          <div class="col-sm-3" *ngIf="floorToggle">
+            <div class="form-group">
+              <label for="FloorNumber">*Floor Number:</label>
+              <input type="text" class="form-control" name="FloorNumber" #FloorNumber="ngModel"
+                [(ngModel)]="model.FloorNumber" required />
+              <div class="text-danger " *ngIf="FloorNumber.invalid &&(FloorNumber.touched || apartmetForm.submitted)">
+                <small>
+                  Please Enter Floor Number</small>
+              </div>
+            </div>
+  
+          </div>
+  
+          <div class="col-sm-3" *ngIf="floorToggle || blockToggle">
+            <label for="TypeOfFlat">*Type Of Flat:</label>
+            <ng-multiselect-dropdown [data]="TypeOfFlatArray" (onSelect)="onTypeOfFlatSelect($event)"
+              (onDeSelect)="onStayingDeSelect($event)" name="TypeOfFlat" [(ngModel)]="model.TypeOfFlat"
+              [settings]="TypeOfFlatSettings" #TypeOfFlat="ngModel" required>
+            </ng-multiselect-dropdown>
+  
+            <div class="text-danger " *ngIf="TypeOfFlat.invalid &&(TypeOfFlat.touched || apartmetForm.submitted)"><small>
+                Please Select Type Of Flat</small>
+            </div>
+  
+          </div>
+  
+          <div class="col-sm-3" *ngIf="floorToggle">
+            <div class="form-group">
+              <label for="FlatNumber">*Flat Number :</label>
+              <input type="text" class="form-control" #FlatNumber="ngModel" name="FlatNumber"
+                (ngModelChange)="onFlatNumberChange($event)" [(ngModel)]="model.FlatNumber" required />
+              <div class="text-danger " *ngIf="FlatNumber.invalid &&(FlatNumber.touched || apartmetForm.submitted)">
+                <small>
+                  Please Enter FlatNumber</small>
+              </div>
+            </div>
+  
+          </div>
+          <div class="col-sm-3">
+            <div class="form-group">
+              <label for="NumberOfMembers">Number Of Members:</label>
+              <input type="text" class="form-control" name="NumberOfMembers" (ngModelChange)="onMembersChange($event)"
+                [(ngModel)]="model.NumberOfMembers" />
+            </div>
+  
+          </div>
+          <div class="col-sm-3">
+            <div class="form-group">
+              <label for="ApartmentId">*Apartment Id:</label>
+              <input type="text" class="form-control" name="ApartmentId" [(ngModel)]="model.ApartmentId"
+                #ApartmentId="ngModel" required />
+              <div class="text-danger " *ngIf="ApartmentId.invalid &&(ApartmentId.touched || apartmetForm.submitted)">
+                <small>
+                  Please Enter Apartment Id</small>
+              </div>
+            </div>
+          </div>
+        </div>
+        <label class="font-weight-bold" *ngIf="model.NumberOfMembers !== '' && model.NumberOfMembers !== undefined">Family
+          Details :</label>
+        <div class="row" *ngFor="let model of model.Members; let i=index">
+          <div class="col">
+            <div class="form-group">
+              <label for="FullName">Full Name:</label>
+              <input type="text" class="form-control" [name]="'FullName' + i" [(ngModel)]="model.FullName" />
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <label for="LastName">DOB:</label>
+              <input type="date" class="form-control" [name]="'DOB' + i" [(ngModel)]="model.DOB" />
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <label for="AadharCardNumber">Aadhar Number:</label>
+              <input type="text" class="form-control" [name]="'AadharCardNumber' + i"
+                [(ngModel)]="model.AadharCardNumber" />
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <label for="MobileNumber">Mobile Number:</label>
+              <input type="text" class="form-control" [name]="'MobileNumber' + i" [(ngModel)]="model.MobileNumber" />
+            </div>
+          </div>
+        </div>
+        <label class="font-weight-bold">Vehicle Details :</label>
+  
+        <div class="row">
+          <div class="col-sm-3">
+            <div class="form-group">
+              <label for="NumberOfVehicels">Number Of Vehicels:</label>
+              <input type="text" class="form-control" name="NumberOfVehicels" (ngModelChange)="onVehiclesChange($event)"
+                [(ngModel)]="model.NumberOfVehicles" />
+            </div>
+  
+          </div>
+          <div class="col-sm-3">
+            <div class="form-group">
+              <label for="ParkingNumber">Parking Number:</label>
+              <input type="text" class="form-control" name="ParkingNumber" [(ngModel)]="model.ParkingNumber" />
+            </div>
+  
+          </div>
+        </div>
+  
+  
+        <div class="row" *ngFor="let model of model.Vechiels; let i=index">
+          <div class="col">
+            <label for="TypeOfVehicle">Type Of Vehicle:</label>
+  
+            <ng-multiselect-dropdown [data]="VehicleArray" [name]="'TypeOfVehicle' + i" [(ngModel)]="model.TypeOfVehicle"
+              (onSelect)="onVehicleSelect($event,i)" (onDeSelect)="onVehicleDeSelect($event,i)"
+              [settings]="VehicleSettings">
+            </ng-multiselect-dropdown>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <label for="VehicleName">Vehicle Name:</label>
+              <input type="text" class="form-control" [name]="'VehicleName' + i" [(ngModel)]="model.VehicleName" />
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <label for="VehicleNumber">Vehicle Number:</label>
+              <input type="text" class="form-control" [name]="'VehicleNumber' + i" [(ngModel)]="model.VehicleNumber" />
+            </div>
+          </div>
+        </div>
+  
+  
+        <div class="d-flex justify-content-center">
+          <button type="submit" class="btn btn-success"> Submit </button>
+          <button type="reset" class="btn btn-danger ml-2"> Reset </button>
+  
+        </div>
+    </form>
+  </div>
+  
