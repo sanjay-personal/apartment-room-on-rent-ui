@@ -13,11 +13,17 @@
               </div>
               <!-- <input type="text" class="form-control" name="ApartmentName" [(ngModel)]="login.ApartmentName" #ApartmentName="ngModel"
                 placeholder="ApartmentName" required> -->
-                <select class="form-control" name="ApartmentName" [(ngModel)]="login.ApartmentName" #ApartmentName="ngModel"
+
+                <!-- <select class="form-control" name="ApartmentName" [(ngModel)]="login.ApartmentName" #ApartmentName="ngModel"
                  required>
                 <option value="null">select</option>
                 <option *ngFor="let item of apartmentNames" [value]="item.ApartmentId">{{item.ApartmentName}}</option>
-              </select>
+              </select> -->
+
+              <ng-multiselect-dropdown class="form-control p-0" [data]="apartmentNames" (onSelect)="onApartmentNamesSelect($event)"
+             name="ApartmentName" [(ngModel)]="login.ApartmentName"
+              [settings]="apartmentNamesSetting" #ApartmentName="ngModel" required>
+            </ng-multiselect-dropdown>
             </div>
             <small class="text-danger"
             *ngIf="ApartmentName.invalid && (ApartmentName.touched || Login.submitted)">Please
