@@ -63,6 +63,7 @@ export class ApartmentComponent implements OnInit {
       this.loadEdit()
     }
   }
+  
 
   loadEdit() {
     let editParticular
@@ -267,8 +268,9 @@ export class ApartmentComponent implements OnInit {
       form.resetForm()
       alert(resp['status']['message'])
       } else {
+        this.model.TypeOfFlat = [this.TypeOfFlatArray.find(x=>x.item_id === this.model['TypeOfFlat'])]
+        this.model.Staying = [this.StayingArray.find(x=>x.item_id === this.model['Staying'])];
         alert(resp['status']['message'])
-
       }
     })
   }
