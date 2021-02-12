@@ -54,7 +54,7 @@
           <div class="col-sm-3" *ngIf="blockToggle">
             <div class="form-group">
               <label for="BlockNumber">*Block Number:</label>
-              <input type="text" class="form-control" name="BlockNumber" [(ngModel)]="model.BlockNumber"  #BlockNumber="ngModel" required />
+              <input [readonly] ="editInput" type="text" class="form-control" name="BlockNumber" [(ngModel)]="model.BlockNumber"  #BlockNumber="ngModel" required />
               <div class="text-danger " *ngIf="BlockNumber.invalid &&(BlockNumber.touched || apartmetForm.submitted)">
                 <small>
                   Please Enter Block Number</small>
@@ -65,7 +65,7 @@
           <div class="col-sm-3" *ngIf="floorToggle">
             <div class="form-group">
               <label for="FloorNumber">*Floor Number:</label>
-              <input type="text" class="form-control" name="FloorNumber" #FloorNumber="ngModel"
+              <input [readonly]="editInput" type="text" class="form-control" name="FloorNumber" #FloorNumber="ngModel"
                 [(ngModel)]="model.FloorNumber" required />
               <div class="text-danger " *ngIf="FloorNumber.invalid &&(FloorNumber.touched || apartmetForm.submitted)">
                 <small>
@@ -91,7 +91,7 @@
           <div class="col-sm-3" *ngIf="floorToggle">
             <div class="form-group">
               <label for="FlatNumber">*Flat Number :</label>
-              <input type="text" class="form-control" #FlatNumber="ngModel" name="FlatNumber"
+              <input [readonly]="editInput" type="text" class="form-control" #FlatNumber="ngModel" name="FlatNumber"
                 (ngModelChange)="onFlatNumberChange($event)" [(ngModel)]="model.FlatNumber" required />
               <div class="text-danger " *ngIf="FlatNumber.invalid &&(FlatNumber.touched || apartmetForm.submitted)">
                 <small>

@@ -29,6 +29,9 @@ tableHeaders: TreeTableHeaderObject[] = []; //Table Headers and Property Binding
         // const editAction = new TreeTableRowAction('Edit', 'Edit', 'btn btn-sm btn-secondary', this.edit);
         // editAction.context = this;
         // row.actions.push(editAction);
+        // <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
+        // <i class="fa fa-thumbs-o-down" aria-hidden="true"></i>
+
         row.clickablesContext = this;
         row.clickables = {
           ApartmentName: this.ApartmentNameClicks,
@@ -46,8 +49,11 @@ tableHeaders: TreeTableHeaderObject[] = []; //Table Headers and Property Binding
     this.tableHeaders.push(new TreeTableHeaderObject('Apartment Name', 'ApartmentName', null, true));
     this.tableHeaders.push(new TreeTableHeaderObject('Staying', 'Staying', null, true));
     this.tableHeaders.push(new TreeTableHeaderObject('Joining Date', 'JoiningDate', null, true));
-    this.tableHeaders.push(new TreeTableHeaderObject('Apartment Id', 'ApartmentId', null, true));
+    // this.tableHeaders.push(new TreeTableHeaderObject('Apartment Id', 'ApartmentId', null, true));
     this.tableHeaders.push(new TreeTableHeaderObject('Number Of Vehicles', 'NumberOfVehicles', null, true));
+    this.tableHeaders.push(new TreeTableHeaderObject('Active', '=CONCAT(<i class="fa fa-thumbs-o-up" aria-hidden="true"></i>)', 'null', true));
+    this.tableHeaders.push(new TreeTableHeaderObject('Active', '=CONCAT(<i class="fa fa-thumbs-o-down" aria-hidden="true"></i>)', 'null', true));
+
     // const actions = new TreeTableHeaderObject('Actions', '', null, true);
     // actions.dataType = TtDataType.ACTIONS;
     // this.tableHeaders.push(actions);
@@ -57,7 +63,7 @@ tableHeaders: TreeTableHeaderObject[] = []; //Table Headers and Property Binding
 
   ApartmentNameClicks(data: any) {
     console.log("data",data)
-    this.router.navigate(['/form/' + data['ApartmentId']],{queryParams:{id: data['ApartmentId']}});
+    this.router.navigate(['/form/' + data['FlatId']],{queryParams:{id: data['FlatId']}});
   }
 
 }

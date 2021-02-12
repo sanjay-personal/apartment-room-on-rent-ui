@@ -4,7 +4,7 @@ import { Apartments } from 'src/app/classes/apartments';
 import { HttpClient } from '@angular/common/http';
 import { Member } from 'src/app/classes/members';
 import { Vehicel } from 'src/app/classes/vehicel';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import * as moment from 'moment';
 import { AuthService } from 'src/app/service/auth.service';
 import { typeWithParameters } from '@angular/compiler/src/render3/util';
@@ -42,9 +42,9 @@ export class ApartmentComponent implements OnInit {
   userDetails = {}
   ApartmentName: any;
   ApartmentId: any;
-  
+  editInput: boolean = false
 
-  constructor(private http: HttpClient,private route: ActivatedRoute, private authService: AuthService) { }
+  constructor(private http: HttpClient,private route: ActivatedRoute, private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
     this.editingId = this.route.snapshot.queryParams['id'];
@@ -61,6 +61,7 @@ export class ApartmentComponent implements OnInit {
     this.onTypeOfFlat();
     if(this.editingId !== undefined) {
       this.loadEdit()
+      this.editInput = true
     }
   }
   
@@ -257,8 +258,21 @@ export class ApartmentComponent implements OnInit {
 
 
     if(this.editingId !== undefined) {
+      this.model['FlatId'] = this.editingId
       this.http.put('http://localhost:8080/api/apartments', this.model).subscribe(resp => {
         console.log("resppppp", resp)
+        if(resp['status']['code'] === 'SUCCESS') {
+          alert(resp['status']['message'])
+          this.router.navigate([""])
+
+          } else {
+            // this.model.TypeOfFlat = [this.TypeOfFlatArray.find(x=>x.item_id === this.model['TypeOfFlat'])]
+            // this.model.Staying = [this.StayingArray.find(x=>x.item_id === this.model['Staying'])];
+            alert(resp['status']['message'])
+          }
+
+
+
       })
     } else {
     this.http.post('http://localhost:8080/api/apartments', this.model).subscribe(resp => {
