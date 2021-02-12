@@ -6,6 +6,8 @@ import { Member } from 'src/app/classes/members';
 import { Vehicel } from 'src/app/classes/vehicel';
 import { ActivatedRoute } from '@angular/router';
 import * as moment from 'moment';
+import { AuthService } from 'src/app/service/auth.service';
+import { typeWithParameters } from '@angular/compiler/src/render3/util';
 
 
 
@@ -37,14 +39,23 @@ export class ApartmentComponent implements OnInit {
   fieldArray = []
   editingId: any;
   editResp = {}
+  userDetails = {}
+  ApartmentName: any;
+  ApartmentId: any;
+  
 
-  constructor(private http: HttpClient,private route: ActivatedRoute) { }
+  constructor(private http: HttpClient,private route: ActivatedRoute, private authService: AuthService) { }
 
   ngOnInit() {
     this.editingId = this.route.snapshot.queryParams['id'];
 
-    console.log("routeee",this.route.snapshot)
+    console.log("routeee",this.route.snapshot, this.authService.getLoggedUserDetails())
     console.log("this.editingId",this.editingId)
+    this.userDetails  = this.authService.getLoggedUserDetails()
+    this.ApartmentName = this.userDetails['ApartmentName']
+    this.ApartmentId = this.userDetails['ApartmentId']
+
+
     this.onStaying();
     this.onParticular();
     this.onTypeOfFlat();
@@ -55,11 +66,11 @@ export class ApartmentComponent implements OnInit {
 
   loadEdit() {
     let editParticular
-
+    let editVechiels = []
     this.http.get('http://localhost:8080/api/apartments/'+this.editingId).subscribe(resp => {
       console.log("resppppp", resp)
       this.editResp = resp['primary']
-      this.model.ApartmentName = this.editResp['ApartmentName'];
+      // this.model.ApartmentName = this.editResp['ApartmentName'];
       this.model.Staying = [this.StayingArray.find(x=>x.item_id === this.editResp['Staying'])];
       editParticular = this.editResp['BlockNumber'];
 
@@ -80,17 +91,19 @@ export class ApartmentComponent implements OnInit {
       this.model.TypeOfFlat = [this.TypeOfFlatArray.find(x=>x.item_id === this.editResp['TypeOfFlat'])]
       this.model.NumberOfMembers = this.editResp['NumberOfMembers']
       this.model.Members = this.editResp['Members']
-      this.model.ApartmentId = this.editResp['ApartmentId']
+      // this.model.ApartmentId = this.editResp['ApartmentId']
       this.model.NumberOfVehicles =  this.editResp['NumberOfVehicles']
       this.model.Vechiels = this.editResp['Vechiels']
       this.model.ParkingNumber = this.editResp['ParkingNumber']
-
-      // for(var i=0; i<this.editResp['Vechiels'].length; i++) {
-      //   // this.model.Vechiels.push()
-      // }
-
-
-
+       this.onTypeOfVehicle()
+      for(var i=0; i<this.editResp['Vechiels'].length; i++) {
+        for(var j=0; j<this.VehicleArray.length; j++) { 
+          if(this.editResp['Vechiels'][i]['TypeOfVehicle'] === this.VehicleArray[j]['item_id']) {
+            editVechiels.push(this.VehicleArray[j])
+          }
+        }
+      
+      }
     })
   }
 
@@ -144,7 +157,7 @@ export class ApartmentComponent implements OnInit {
     // this.model.TypeOfFlat = item['item_id']
   }
   onTypeOfFlatDeSelect(item) {
-    // this.model.TypeOfFlat = ''
+    // this.model.TypeOfFlat = null
 
   }
 
@@ -221,7 +234,7 @@ export class ApartmentComponent implements OnInit {
     this.model.Vechiels[i].TypeOfVehicle = item['item_id']
   }
   onVehicleDeSelect(item, i) {
-    this.model.Vechiels[i].TypeOfVehicle = ''
+    this.model.Vechiels[i].TypeOfVehicle = null
 
   }
 
@@ -229,15 +242,36 @@ export class ApartmentComponent implements OnInit {
     this.model.ParkingNumber = e
   }
 
-  submit(form: NgForm) {
+  submit(form: NgForm,e) {
+    e.preventDefault();
     console.log("formmmmmmm", this.model)
-    // this.http.post(this.productsUrl, product)
+    if(form.invalid) {
+      return
+    }
+    const dis = this
     this.model['Staying'] = this.model['Staying'][0]['item_id'] 
     this.model['TypeOfFlat'] = this.model['TypeOfFlat'][0]['item_id'] 
+    this.model['ApartmentName'] = this.ApartmentName
+    this.model['ApartmentId'] = this.ApartmentId
 
+
+    if(this.editingId !== undefined) {
+      this.http.put('http://localhost:8080/api/apartments', this.model).subscribe(resp => {
+        console.log("resppppp", resp)
+      })
+    } else {
     this.http.post('http://localhost:8080/api/apartments', this.model).subscribe(resp => {
       console.log("resppppp", resp)
+
+      if(resp['status']['code'] === 'SUCCESS') {
+      form.resetForm()
+      alert(resp['status']['message'])
+      } else {
+        alert(resp['status']['message'])
+
+      }
     })
+  }
   }
 
 }

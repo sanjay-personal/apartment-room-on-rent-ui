@@ -3,7 +3,6 @@ import { Vehicel } from './vehicel';
 
 export class Apartments {
 
-    ApartmentName: any;
     Staying: any;
     BlockNumber: any;
     FloorNumber: any;
@@ -15,7 +14,9 @@ export class Apartments {
     NumberOfVehicles: any;
     Vechiels: Vehicel[];
     ParkingNumber: any;
-    ApartmentId: any
+    // ApartmentId: any
+    // ApartmentName: any;
+
 
 
 }

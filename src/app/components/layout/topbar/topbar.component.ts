@@ -16,6 +16,7 @@ export class TopbarComponent implements OnInit {
 
   logout() {
     sessionStorage.removeItem('Token')
+    sessionStorage.removeItem('userdetails')
     this.authservice.loginStateChanged()
     this.router.navigate(['login'])
 

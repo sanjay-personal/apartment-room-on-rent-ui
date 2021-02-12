@@ -10,6 +10,8 @@ export class AuthService {
   private token: any
   public loginState = new Subject();
 
+  private userdetails: any
+
   setToken(token) {
     console.log("tokennn",token)
     this.token = token;
@@ -33,6 +35,16 @@ export class AuthService {
     else {
       return false
     }
+  }
+
+  getLoggedUserDetails() {
+     return JSON.parse(sessionStorage.getItem("userdetails"))
+  }
+
+  setLoggedUserDetails(userdetails:any) {
+    this.userdetails =  userdetails
+    sessionStorage.setItem("userdetails", JSON.stringify(userdetails));
+
   }
 
 

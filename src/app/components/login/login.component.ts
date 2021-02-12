@@ -33,6 +33,8 @@ export class LoginComponent implements OnInit {
         return
       }
       this.authservice.setToken(res['body']['token'])
+      console.log("res['body']",res['body'])
+      this.authservice.setLoggedUserDetails(res['body'])
       this.authservice.loginStateChanged()
       this.router.navigate([""])
     })

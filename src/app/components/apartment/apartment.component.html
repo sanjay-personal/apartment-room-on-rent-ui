@@ -1,16 +1,16 @@
 <div class="container">
-    <form #apartmetForm="ngForm" class="pt-3" (ngSubmit)="submit(apartmetForm)">
+    <form #apartmetForm="ngForm" class="pt-3" (ngSubmit)="submit(apartmetForm,$event)">
   
       <div class="row">
         <div class="col-sm-3">
           <div class="form-group">
             <label for="ApartmentName">*Apartment Name:</label>
-            <input type="text" class="form-control" name="ApartmentName" [(ngModel)]="model.ApartmentName"
-              #ApartmentName="ngModel" required />
-            <div class="text-danger " *ngIf="ApartmentName.invalid &&(ApartmentName.touched || apartmetForm.submitted)">
+            <input type="text" class="form-control" name="ApartmentName" [value]="ApartmentName"
+               readonly />
+            <!-- <div class="text-danger " *ngIf="ApartmentName.invalid &&(ApartmentName.touched || apartmetForm.submitted)">
               <small>
                 Please Enter Apartment Name</small>
-            </div>
+            </div> -->
           </div>
         </div>
         <div class="col-sm-3">
@@ -108,7 +108,7 @@
             </div>
   
           </div>
-          <div class="col-sm-3">
+          <!-- <div class="col-sm-3">
             <div class="form-group">
               <label for="ApartmentId">*Apartment Id:</label>
               <input type="text" class="form-control" name="ApartmentId" [(ngModel)]="model.ApartmentId"
@@ -118,7 +118,7 @@
                   Please Enter Apartment Id</small>
               </div>
             </div>
-          </div>
+          </div> -->
         </div>
         <label class="font-weight-bold" *ngIf="model.NumberOfMembers !== '' && model.NumberOfMembers !== undefined">Family
           Details :</label>
