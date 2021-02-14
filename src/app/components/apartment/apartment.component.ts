@@ -50,6 +50,8 @@ export class ApartmentComponent implements OnInit {
     this.editingId = this.route.snapshot.queryParams['id'];
 
     console.log("routeee",this.route.snapshot, this.authService.getLoggedUserDetails())
+    console.log("routeee",this.route, this.authService.getLoggedUserDetails())
+
     console.log("this.editingId",this.editingId)
     this.userDetails  = this.authService.getLoggedUserDetails()
     this.ApartmentName = this.userDetails['ApartmentName']

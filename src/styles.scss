@@ -1,13 +1,40 @@
 /* You can add global styles to this file, and also import other style files */
+// @import url("https://fonts.googleapis.com/css?family=Montserrat:400,500,700&display=swap");
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
 .footerbackground
 {
-    background-color: #383b6f;
+    background-color: brown;
 }
 
 .fs {
     font-size: 12px;
 }
-
+.main {
+    background-color: whitesmoke;
+}
 .backgroundcolor {
     background: #a52a2a !important;
 }
+
+table.table tbody tr td button.successWidth{
+    width: 67px !important;
+}
+
+.btn-brown {
+    background-color: brown !important;
+    border-color: brown !important;
+    color: white !important;
+}
+
+body {
+    font-family: "Roboto" !important;
+}
+
+.cb {
+    color: brown;
+}
+
+.pointer {
+    cursor: pointer;
+} 

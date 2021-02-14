@@ -8,10 +8,14 @@ import { AuthService } from 'src/app/service/auth.service';
   styleUrls: ['./topbar.component.scss']
 })
 export class TopbarComponent implements OnInit {
+  userDetails: any;
+  ApartmentName: any;
 
   constructor(private router: Router, private authservice: AuthService) { }
 
   ngOnInit() {
+    this.userDetails  = this.authservice.getLoggedUserDetails()
+    this.ApartmentName = this.userDetails['ApartmentName']
   }
 
   logout() {
