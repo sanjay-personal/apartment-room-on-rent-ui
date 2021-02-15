@@ -48,10 +48,12 @@ export class ApartmentListComponent implements OnInit {
           edit.context = this;
           row.actions.push(edit);
         }
+        if(resp['primary'][i]['Active'] === "1") {
         row.clickablesContext = this;
         row.clickables = {
           ApartmentName: this.ApartmentNameClicks,
         };
+      }
         data.push(row);
       }
     })
@@ -88,6 +90,16 @@ export class ApartmentListComponent implements OnInit {
 
   ActiveOrInActive(data) {
     console.log("ActiveOrInActive",data)
+    let sendData = {"FlatId": data["FlatId"],"Active": data["Active"]}
+    this.http.post('http://localhost:8080/api/apartmentStatus', sendData).subscribe(resp => {
+      console.log("resppppp", resp)
+      if(resp['status']['code'] === 'SUCCESS') {
+      alert(resp['status']['message'])
+      this.populateDummyData();
+      } else {
+        alert(resp['status']['message'])
+      }
+    })
 
   }
 

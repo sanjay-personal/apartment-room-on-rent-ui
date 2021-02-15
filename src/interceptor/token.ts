@@ -11,11 +11,11 @@ export class Token implements HttpInterceptor {
     intercept(req: HttpRequest<any>, next: HttpHandler):Observable<HttpEvent<any>> {
         const dis = this;
         if (this.authService.getToken() !== null) {
-          const header = new HttpHeaders({ 'Authorization': 'bearer ' + this.authService.getToken()});
-          console.log("$$header",header)
+          const header = new HttpHeaders({ 'Authorization': 'bearer ' + this.authService.getTokenStorage()});
+          // console.log("$$header",header)
           const duplicate = req.clone({ headers: header });
-          console.log("$$duplicate",duplicate)
-          console.log("$$req.clone({ headers: header })",req.clone({ headers: header }))
+          // console.log("$$duplicate",duplicate)
+          // console.log("$$req.clone({ headers: header })",req.clone({ headers: header }))
           return next.handle(duplicate);
         }
     

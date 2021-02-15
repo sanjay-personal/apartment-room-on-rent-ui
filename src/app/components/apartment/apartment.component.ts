@@ -266,15 +266,9 @@ export class ApartmentComponent implements OnInit {
         if(resp['status']['code'] === 'SUCCESS') {
           alert(resp['status']['message'])
           this.router.navigate([""])
-
           } else {
-            // this.model.TypeOfFlat = [this.TypeOfFlatArray.find(x=>x.item_id === this.model['TypeOfFlat'])]
-            // this.model.Staying = [this.StayingArray.find(x=>x.item_id === this.model['Staying'])];
             alert(resp['status']['message'])
           }
-
-
-
       })
     } else {
     this.http.post('http://localhost:8080/api/apartments', this.model).subscribe(resp => {
