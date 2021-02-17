@@ -30,6 +30,7 @@ export class LoginComponent implements OnInit {
     this.loginService.postLogin(this.login).subscribe(res=>{
       if(res['body']['code'] === 'ERROR') {
         alert(res['body']['message'])
+        form.resetForm()
         return
       }
       this.authservice.setToken(res['body']['token'])

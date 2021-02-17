@@ -21,4 +21,8 @@ export class LoginService extends BaseService {
     return this.http.post(this.baseurl+"login",req,{observe: 'response'})
   }
 
+  getFlatNumbers() {
+    return this.http.get(this.baseurl+"flats")
+  }
+
 }

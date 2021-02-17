@@ -1,0 +1,55 @@
+<div class="container-fluid">
+    <div class="d-flex justify-content-center align-items-center">
+        <div class="card">
+            <div class="card-body">
+                <form #maintenance="ngForm" (ngSubmit)="submit(maintenance, $event)">
+                    <div class="form-group">
+                        <label for="ApartmentName">Apartment Name:</label>
+                        <input type="text" class="form-control" name="ApartmentName" [value]="ApartmentName" readonly />
+                    </div>
+                    <div class="form-group">
+                        <label for="FlatNumber">*Flat Number:</label>
+                        <ng-multiselect-dropdown class="form-control p-0" [data]="flatNumber"
+                            (onSelect)="onFlatNumberSelect($event)" name="FlatNumber" [(ngModel)]="model.FlatNumber"
+                            [settings]="flatNumberSetting" #FlatNumber="ngModel" required>
+                        </ng-multiselect-dropdown>
+                        <small class="text-danger"
+                            *ngIf="FlatNumber.invalid && (FlatNumber.touched || maintenance.submitted)">Please
+                            Enter the Flat Number</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="MaintenanceDate">*Maintenance Date:</label>
+                        <input type="date" class="form-control" #MaintenanceDate="ngModel" name="MaintenanceDate"
+                            [(ngModel)]="model.MaintenanceDate" required />
+                        <div class="text-danger"
+                            *ngIf="MaintenanceDate.invalid &&(MaintenanceDate.touched || maintenance.submitted)">
+                            <small>
+                                Please Enter Maintenance Date</small>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="MaintenanceAmount">*Maintenance Amount:</label>
+                        <input type="text" class="form-control" #MaintenanceAmount="ngModel" name="MaintenanceAmount"
+                            [(ngModel)]="model.MaintenanceAmount" required />
+                        <div class="text-danger "
+                            *ngIf="MaintenanceAmount.invalid &&(MaintenanceAmount.touched || maintenance.submitted)">
+                            <small>
+                                Please Enter Maintenance Amount</small>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Remarks">Remarks:</label>
+                        <textarea class="form-control" #Remarks="ngModel" name="Remarks"
+                            [(ngModel)]="model.Remarks"></textarea>
+                    </div>
+            <div class="d-flex justify-content-between">
+                <button type="submit" class="btn btn-secondary btn-block">Submit</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+</div>

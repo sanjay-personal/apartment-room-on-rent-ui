@@ -4,6 +4,7 @@ import { ApartmentListComponent } from './components/apartment-list/apartment-li
 import { ApartmentComponent } from './components/apartment/apartment.component';
 import { LoginComponent } from './components/login/login.component';
 import { SignupComponent } from './components/signup/signup.component';
+import { MaintenanceComponent } from './components/maintenance/maintenance.component';
 
 
 const routes: Routes = [{
@@ -21,6 +22,8 @@ const routes: Routes = [{
   path: "login", component: LoginComponent
 }, {
   path: "signup", component: SignupComponent
+}, {
+  path: "maintenance", component: MaintenanceComponent
 }];
 
 @NgModule({

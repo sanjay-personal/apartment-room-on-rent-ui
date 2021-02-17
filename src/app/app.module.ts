@@ -16,6 +16,7 @@ import { SignupComponent } from './components/signup/signup.component';
 import { LoginDirective } from './directive/login.directive';
 import { AuthService } from './service/auth.service';
 import { Token } from 'src/interceptor/token';
+import { MaintenanceComponent } from './components/maintenance/maintenance.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { Token } from 'src/interceptor/token';
     FooterComponent,
     LoginComponent,
     SignupComponent,
-    LoginDirective
+    LoginDirective,
+    MaintenanceComponent
   ],
   imports: [
     BrowserModule,
