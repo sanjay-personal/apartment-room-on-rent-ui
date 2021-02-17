@@ -17,6 +17,8 @@ import { LoginDirective } from './directive/login.directive';
 import { AuthService } from './service/auth.service';
 import { Token } from 'src/interceptor/token';
 import { MaintenanceComponent } from './components/maintenance/maintenance.component';
+import { AllowonlynumbersDirective } from './directive/allowonlynumbers.directive';
+import { MaintenanceListComponent } from './components/maintenance/maintenance-list/maintenance-list.component';
 
 
 @NgModule({
@@ -29,7 +31,9 @@ import { MaintenanceComponent } from './components/maintenance/maintenance.compo
     LoginComponent,
     SignupComponent,
     LoginDirective,
-    MaintenanceComponent
+    MaintenanceComponent,
+    AllowonlynumbersDirective,
+    MaintenanceListComponent
   ],
   imports: [
     BrowserModule,

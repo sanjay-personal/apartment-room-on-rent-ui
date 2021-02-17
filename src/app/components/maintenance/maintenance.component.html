@@ -31,13 +31,13 @@
 
                     <div class="form-group">
                         <label for="MaintenanceAmount">*Maintenance Amount:</label>
-                        <input type="text" class="form-control" #MaintenanceAmount="ngModel" name="MaintenanceAmount"
-                            [(ngModel)]="model.MaintenanceAmount" required />
-                        <div class="text-danger "
+                        <input type="text" class="form-control" name="MaintenanceAmount" [value] = "MaintenanceAmount"
+                             readonly />
+                        <!-- <div class="text-danger "
                             *ngIf="MaintenanceAmount.invalid &&(MaintenanceAmount.touched || maintenance.submitted)">
                             <small>
                                 Please Enter Maintenance Amount</small>
-                        </div>
+                        </div> -->
                     </div>
 
                     <div class="form-group">

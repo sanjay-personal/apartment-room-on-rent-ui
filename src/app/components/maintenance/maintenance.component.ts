@@ -22,6 +22,7 @@ export class MaintenanceComponent implements OnInit {
   userDetails = {}
   ApartmentName: any;
   ApartmentId: any;
+  MaintenanceAmount: any;
 
 
   ngOnInit() {
@@ -29,6 +30,7 @@ export class MaintenanceComponent implements OnInit {
     this.userDetails  = this.authService.getLoggedUserDetails()
     this.ApartmentName = this.userDetails['ApartmentName']
     this.ApartmentId = this.userDetails['ApartmentId']
+    this.MaintenanceAmount = this.userDetails['MaintenanceAmount']
     this.loadFlatNumbers()
   }
 
@@ -63,17 +65,23 @@ export class MaintenanceComponent implements OnInit {
     if(form.invalid) {
       return
     }
-    // this.http.post('http://localhost:8080/api/apartments', this.model).subscribe(resp => {
-    //   console.log("resppppp", resp)
-    //   if(resp['status']['code'] === 'SUCCESS') {
-    //   form.resetForm()
-    //   alert(resp['status']['message'])
-    //   } else {
-    //     this.model.TypeOfFlat = [this.TypeOfFlatArray.find(x=>x.item_id === this.model['TypeOfFlat'])]
-    //     this.model.Staying = [this.StayingArray.find(x=>x.item_id === this.model['Staying'])];
-    //     alert(resp['status']['message'])
-    //   }
-    // })
+    this.model['ApartmentName'] = this.ApartmentName
+    this.model['ApartmentId'] = this.ApartmentId
+    this.model['FlatId'] = this.model.FlatNumber[0]['FlatId']
+    this.model['FlatNumber'] = this.model.FlatNumber[0]['FlatNumber']
+    this.model['MaintenanceAmount'] = this.MaintenanceAmount
+
+
+    this.http.post('http://localhost:8080/api/maintenance', this.model).subscribe(resp => {
+      console.log("resppppp", resp)
+      if(resp['status']['code'] === 'SUCCESS') {
+      form.resetForm()
+      alert(resp['status']['message'])
+      } else {
+        this.model.FlatNumber = [this.flatNumber.find(x=>x.FlatId === this.model['FlatId'])]
+        alert(resp['status']['message'])
+      }
+    })
   }
 
 }
