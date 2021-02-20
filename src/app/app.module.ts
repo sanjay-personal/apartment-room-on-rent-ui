@@ -19,6 +19,7 @@ import { Token } from 'src/interceptor/token';
 import { MaintenanceComponent } from './components/maintenance/maintenance.component';
 import { AllowonlynumbersDirective } from './directive/allowonlynumbers.directive';
 import { MaintenanceListComponent } from './components/maintenance/maintenance-list/maintenance-list.component';
+import { ConsolidatedMaintenanceComponent } from './components/maintenance/consolidated-maintenance/consolidated-maintenance.component';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { MaintenanceListComponent } from './components/maintenance/maintenance-l
     LoginDirective,
     MaintenanceComponent,
     AllowonlynumbersDirective,
-    MaintenanceListComponent
+    MaintenanceListComponent,
+    ConsolidatedMaintenanceComponent
   ],
   imports: [
     BrowserModule,

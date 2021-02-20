@@ -2,15 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { TreeTableData, TreeTableHeaderObject, TreeTableRow, TreeTableRowAction, TtDataType } from 'angular-tree-table';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import * as moment from 'moment';
 
 
 @Component({
-  selector: 'app-maintenance-list',
-  templateUrl: './maintenance-list.component.html',
-  styleUrls: ['./maintenance-list.component.scss']
+  selector: 'app-consolidated-maintenance',
+  templateUrl: './consolidated-maintenance.component.html',
+  styleUrls: ['./consolidated-maintenance.component.scss']
 })
-export class MaintenanceListComponent implements OnInit {
+export class ConsolidatedMaintenanceComponent implements OnInit {
 
   tableConfig = {
     context: this,
@@ -37,7 +36,7 @@ export class MaintenanceListComponent implements OnInit {
 
   populateDummyData() {
     const data = [];
-    this.http.get('http://localhost:8080/api/maintenance/'+moment(new Date()).format('MMMM')).subscribe(resp => {
+    this.http.get('http://localhost:8080/api/maintenance').subscribe(resp => {
       console.log("resppppp", resp)
       for (let i = 0; i < resp['primary'].length; i++) {
         const row = new TreeTableRow(i + '',resp['primary'][i] , false, null);

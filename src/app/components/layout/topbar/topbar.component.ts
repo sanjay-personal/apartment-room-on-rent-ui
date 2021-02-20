@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/service/auth.service';
+import * as moment from 'moment';
+
 
 @Component({
   selector: 'app-topbar',
@@ -10,10 +12,12 @@ import { AuthService } from 'src/app/service/auth.service';
 export class TopbarComponent implements OnInit {
   userDetails: any;
   ApartmentName: any;
+  monthWise: any
 
   constructor(private router: Router, private authservice: AuthService) { }
 
   ngOnInit() {
+    this.monthWise = moment(new Date()).format('MMMM')
     this.userDetails  = this.authservice.getLoggedUserDetails()
     this.ApartmentName = this.userDetails['ApartmentName']
   }
