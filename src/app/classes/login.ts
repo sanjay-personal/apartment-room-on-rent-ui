@@ -1,7 +1,7 @@
 export class Login
 {
     constructor(
-        public ApartmentName:any,
+        public Email:any,
         public Password:any
     ){
 

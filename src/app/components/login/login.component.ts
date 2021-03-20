@@ -12,21 +12,22 @@ import { AuthService } from 'src/app/service/auth.service';
 })
 export class LoginComponent implements OnInit {
   login: Login = new Login(null,null)
-  apartmentNames = []
-  apartmentNamesSetting = {}
+  // apartmentNames = []
+  // apartmentNamesSetting = {}
 
 
   constructor(private loginService: LoginService , private router: Router, private authservice: AuthService) { }
 
   ngOnInit() {
-    this.loadApartments()
+    // this.loadApartments()
   }
 
   onSubmit(form: NgForm,e) {
     if (form.invalid) {
       return;
     }
-    this.login['ApartmentName'] = this.login['ApartmentName'][0]['ApartmentId']
+    console.log("submit",this.login,form)
+    // this.login['ApartmentName'] = this.login['ApartmentName'][0]['ApartmentId']
     this.loginService.postLogin(this.login).subscribe(res=>{
       if(res['body']['code'] === 'ERROR') {
         alert(res['body']['message'])
@@ -35,33 +36,33 @@ export class LoginComponent implements OnInit {
       }
       this.authservice.setToken(res['body']['token'])
       console.log("res['body']",res['body'])
-      this.authservice.setLoggedUserDetails(res['body'])
+      this.authservice.setLoggedUserDetails(res['primary'])
       this.authservice.loginStateChanged()
       this.router.navigate([""])
     })
   }
 
-  loadApartments() {
+  // loadApartments() {
 
-    this.apartmentNamesSetting = {
-      singleSelection: true,
-      idField: 'ApartmentId',
-      textField: 'ApartmentName',
-      selectAllText: 'Select All',
-      unSelectAllText: 'UnSelect All',
-      allowSearchFilter: true,
-      closeDropDownOnSelection: true
-    };
+  //   this.apartmentNamesSetting = {
+  //     singleSelection: true,
+  //     idField: 'ApartmentId',
+  //     textField: 'ApartmentName',
+  //     selectAllText: 'Select All',
+  //     unSelectAllText: 'UnSelect All',
+  //     allowSearchFilter: true,
+  //     closeDropDownOnSelection: true
+  //   };
 
-    this.loginService.getSignup().subscribe(res=>{
-      this.apartmentNames = res['primary']
-      console.log("apartmentNames",this.apartmentNames)
-    })
-  }
+  //   this.loginService.getSignup().subscribe(res=>{
+  //     this.apartmentNames = res['primary']  
+  //     console.log("apartmentNames",this.apartmentNames)
+  //   })
+  // }
 
 
-  onApartmentNamesSelect(item) {
-    // this.login.ApartmentName = item['ApartmentId']
-  }
+  // onApartmentNamesSelect(item) {
+  //   // this.login.ApartmentName = item['ApartmentId']
+  // }
 
 }
